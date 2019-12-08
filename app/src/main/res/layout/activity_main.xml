@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="mainViewModel"
+            type="com.example.klarnaandroidhomeassignment.viewModel.WeatherViewModel" />
+    </data>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="15dp"
+            tools:context=".ui.MainActivity">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Weather Info"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/latlongtxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="LatLong"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/latlongtextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{Double.toString(mainViewModel.mutableLiveData.latitude)}"
+                app:layout_constraintLeft_toRightOf="@+id/latlongtxt"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintWidth_percent="0.55" />
+
+            <TextView
+                android:id="@+id/timezonetxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="TimeZone"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/latlongtextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/timezonetextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{Double.toString(mainViewModel.mutableLiveData.longitude)}"
+                app:layout_constraintLeft_toRightOf="@+id/timezonetxt"
+                app:layout_constraintTop_toBottomOf="@+id/latlongtextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/timetxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Time"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/timezonetextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/timetextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{mainViewModel.mutableLiveData.timezone}"
+                app:layout_constraintLeft_toRightOf="@+id/timetxt"
+                app:layout_constraintTop_toBottomOf="@+id/timezonetextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/summarytxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Summary"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/timetextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/summarytextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{mainViewModel.mutableLiveData.currentlyWeather.summary}"
+                app:layout_constraintLeft_toRightOf="@+id/summarytxt"
+                app:layout_constraintTop_toBottomOf="@+id/timetextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/precipIntensitytxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Precip Intensity"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/summarytextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/precipIntensitytextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(mainViewModel.mutableLiveData.currentlyWeather.precipIntensity)}"
+                app:layout_constraintLeft_toRightOf="@+id/precipIntensitytxt"
+                app:layout_constraintTop_toBottomOf="@+id/summarytextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/precipProbabilitytxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Precip Probability"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/precipIntensitytextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/precipProbabilitytextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(mainViewModel.mutableLiveData.currentlyWeather.precipProbability)}"
+                app:layout_constraintLeft_toRightOf="@+id/precipProbabilitytxt"
+                app:layout_constraintTop_toBottomOf="@+id/precipIntensitytextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/precipTypetxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Precip Type"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/precipProbabilitytextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/precipTypetextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(mainViewModel.mutableLiveData.currentlyWeather.precipType)}"
+                app:layout_constraintLeft_toRightOf="@+id/precipTypetxt"
+                app:layout_constraintTop_toBottomOf="@+id/precipProbabilitytextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/temperaturetxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Temperature"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/precipTypetextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/temperaturetextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(mainViewModel.mutableLiveData.currentlyWeather.temperature)}"
+                app:layout_constraintLeft_toRightOf="@+id/precipTypetxt"
+                app:layout_constraintTop_toBottomOf="@+id/precipTypetextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/apparentTemperaturetxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:maxLines="1"
+                android:text="Apparent Temp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/temperaturetextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/apparentTemperaturetextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(mainViewModel.mutableLiveData.currentlyWeather.apparentTemperature)}"
+                app:layout_constraintLeft_toRightOf="@+id/apparentTemperaturetxt"
+                app:layout_constraintTop_toBottomOf="@+id/temperaturetextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+            <TextView
+                android:id="@+id/dewPointtxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Dew Point"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/apparentTemperaturetextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/dewPointtextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(mainViewModel.mutableLiveData.currentlyWeather.dewPoint)}"
+                app:layout_constraintLeft_toRightOf="@+id/apparentTemperaturetxt"
+                app:layout_constraintTop_toBottomOf="@+id/apparentTemperaturetextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/humiditytxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Dew Point"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/dewPointtextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/humiditytextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(mainViewModel.mutableLiveData.currentlyWeather.humidity)}"
+                app:layout_constraintLeft_toRightOf="@+id/humiditytxt"
+                app:layout_constraintTop_toBottomOf="@+id/dewPointtextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+            <TextView
+                android:id="@+id/pressuretxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Pressure"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/humiditytextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/pressuretextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(mainViewModel.mutableLiveData.currentlyWeather.pressure)}"
+                app:layout_constraintLeft_toRightOf="@+id/humiditytxt"
+                app:layout_constraintTop_toBottomOf="@+id/humiditytextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/windSpeedtxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="WindSpeed"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/pressuretextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/windSpeedtextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(mainViewModel.mutableLiveData.currentlyWeather.windSpeed)}"
+                app:layout_constraintLeft_toRightOf="@+id/humiditytxt"
+                app:layout_constraintTop_toBottomOf="@+id/pressuretextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/cloudCovertxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Cloud Cover"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/windSpeedtextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/cloudCovertextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(mainViewModel.mutableLiveData.currentlyWeather.cloudCover)}"
+                app:layout_constraintLeft_toRightOf="@+id/cloudCovertxt"
+                app:layout_constraintTop_toBottomOf="@+id/windSpeedtextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/uvIndextxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="UV Index"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/cloudCovertextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/uvIndextextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(mainViewModel.mutableLiveData.currentlyWeather.uvIndex)}"
+                app:layout_constraintLeft_toRightOf="@+id/uvIndextxt"
+                app:layout_constraintTop_toBottomOf="@+id/cloudCovertextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/visibilitytxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Visibility"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/uvIndextextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/visibilitytextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(mainViewModel.mutableLiveData.currentlyWeather.visibility)}"
+                app:layout_constraintLeft_toRightOf="@+id/visibilitytxt"
+                app:layout_constraintTop_toBottomOf="@+id/uvIndextextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/ozonetxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Ozone"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/visibilitytextview"
+                app:layout_constraintWidth_percent="0.45"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/ozonetextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(mainViewModel.mutableLiveData.currentlyWeather.ozone)}"
+                app:layout_constraintLeft_toRightOf="@+id/ozonetxt"
+                app:layout_constraintTop_toBottomOf="@+id/visibilitytextview"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</layout>
