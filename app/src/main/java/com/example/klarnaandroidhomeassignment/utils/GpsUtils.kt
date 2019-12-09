@@ -1,4 +1,4 @@
-package com.mayowa.android.locationwithlivedata
+package com.example.klarnaandroidhomeassignment.utils
 
 import android.app.Activity
 import android.content.ContentValues.TAG
@@ -7,7 +7,7 @@ import android.content.IntentSender
 import android.location.LocationManager
 import android.util.Log
 import android.widget.Toast
-import com.example.klarnaandroidhomeassignment.ui.GPS_REQUEST
+import com.example.klarnaandroidhomeassignment.viewModel.LocationLiveData
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationServices
@@ -36,7 +36,6 @@ class GpsUtils(private val context: Context) {
             settingsClient
                 .checkLocationSettings(locationSettingsRequest)
                 .addOnSuccessListener(context as Activity) {
-                    //  GPS is already enable, callback GPS status through listener
                     OnGpsListener?.gpsStatus(true)
                 }
                 .addOnFailureListener(context) { e ->
@@ -44,8 +43,6 @@ class GpsUtils(private val context: Context) {
                         LocationSettingsStatusCodes.RESOLUTION_REQUIRED ->
 
                             try {
-                                // Show the dialog by calling startResolutionForResult(), and check the
-                                // result in onActivityResult().
                                 val rae = e as ResolvableApiException
                                 rae.startResolutionForResult(context,
                                     GPS_REQUEST

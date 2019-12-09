@@ -1,4 +1,4 @@
-package com.mayowa.android.locationwithlivedata
+package com.example.klarnaandroidhomeassignment.viewModel
 
 import android.annotation.SuppressLint
 import android.content.Context

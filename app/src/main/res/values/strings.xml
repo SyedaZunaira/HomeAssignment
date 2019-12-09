@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Klarna Android Home Assignment</string>
+    <string name="permissions_not_granted">Permission not granted</string>
+    <string name="no_gps">GPS not Enabled</string>
 </resources>

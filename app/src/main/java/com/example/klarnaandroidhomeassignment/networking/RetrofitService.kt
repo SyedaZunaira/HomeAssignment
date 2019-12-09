@@ -1,12 +1,12 @@
+@file:Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
 package com.example.klarnaandroidhomeassignment.networking
 
+import com.example.klarnaandroidhomeassignment.utils.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 object RetrofitService {
-
-    var BASE_URL: String = "https://api.darksky.net/"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)

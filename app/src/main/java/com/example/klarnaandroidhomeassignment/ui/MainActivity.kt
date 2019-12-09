@@ -2,29 +2,22 @@ package com.example.klarnaandroidhomeassignment.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.klarnaandroidhomeassignment.R
+import com.example.klarnaandroidhomeassignment.base.BaseActivity
 import com.example.klarnaandroidhomeassignment.databinding.ActivityMainBinding
-import com.example.klarnaandroidhomeassignment.model.WeatherResponse
+import com.example.klarnaandroidhomeassignment.utils.LOCATION_REQUEST
 import com.example.klarnaandroidhomeassignment.viewModel.WeatherViewModel
-import com.mayowa.android.locationwithlivedata.GpsUtils
 
+class MainActivity : BaseActivity() {
 
-class MainActivity : AppCompatActivity() {
-
-    private var isGPSEnabled = false
-    var weatherViewModel: WeatherViewModel? = null
-    lateinit var binding: ActivityMainBinding
-
+    private var weatherViewModel: WeatherViewModel? = null
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,15 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         weatherViewModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
 
-        binding.mainViewModel = weatherViewModel
-        binding.setLifecycleOwner(this);
-
-        GpsUtils(this).turnGPSOn(object : GpsUtils.OnGpsListener {
-
-            override fun gpsStatus(isGPSEnable: Boolean) {
-                this@MainActivity.isGPSEnabled = isGPSEnable
-            }
-        })
+        this.binding.mainViewModel = weatherViewModel
+        this.binding.lifecycleOwner = this
     }
 
     override fun onStart() {
@@ -53,21 +39,11 @@ class MainActivity : AppCompatActivity() {
         invokeLocationAction()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == GPS_REQUEST) {
-                isGPSEnabled = true
-                invokeLocationAction()
-            }
-        }
-    }
-
-    private fun invokeLocationAction() {
+    override fun invokeLocationAction() {
         when {
             !isGPSEnabled -> Toast.makeText(
                 applicationContext,
-                "GPS not Enabled",
+                getString(R.string.no_gps),
                 Toast.LENGTH_SHORT
             ).show()
 
@@ -75,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
             shouldShowRequestPermissionRationale() -> Toast.makeText(
                 applicationContext,
-                "Permission Request",
+                getString(R.string.permissions_not_granted),
                 Toast.LENGTH_SHORT
             ).show()
 
@@ -90,36 +66,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private fun startLocationUpdate() {
         weatherViewModel?.getLocationData()?.observe(this, Observer {
             weatherViewModel!!.init((it.latitude).toBigDecimal().toPlainString() + "," + (it.longitude).toBigDecimal().toPlainString())
 
             weatherViewModel!!.getWeatherRepository()
-                ?.observe(this, Observer { weatherResponse : WeatherResponse ->
-                    binding?.invalidateAll()
-
+                ?.observe(this, Observer {
+                    binding.invalidateAll()
                 })
         })
     }
 
-    private fun isPermissionsGranted() =
-        ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
-
-    private fun shouldShowRequestPermissionRationale() =
-        ActivityCompat.shouldShowRequestPermissionRationale(
-            this,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) && ActivityCompat.shouldShowRequestPermissionRationale(
-            this,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        )
 
     @SuppressLint("MissingPermission")
     override fun onRequestPermissionsResult(
@@ -136,8 +94,7 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-const val LOCATION_REQUEST = 100
-const val GPS_REQUEST = 101
+
 
 
 

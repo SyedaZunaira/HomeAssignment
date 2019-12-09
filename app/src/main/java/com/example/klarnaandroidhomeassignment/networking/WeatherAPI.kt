@@ -1,6 +1,5 @@
 package com.example.klarnaandroidhomeassignment.networking
 
-import com.example.klarnaandroidhomeassignment.model.CurrentWeather
 import com.example.klarnaandroidhomeassignment.model.WeatherResponse
 import retrofit2.Call
 import retrofit2.http.GET
